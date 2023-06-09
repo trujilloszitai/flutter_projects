@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
 import 'package:http/http.dart' as http;
 
 import 'package:book_catalog/models/book.dart';
@@ -21,17 +20,27 @@ Future<Book> fetchBook() async {
   }
 }
 
-Future<Book?> fetchBooks() async {
-  final response = await http.get(
-      Uri.parse(
-          "https://api.baserow.io/api/database/rows/table/170700/?user_field_names=true"),
-      headers: {
-        HttpHeaders.authorizationHeader: 'Token ${AppConstants.apiToken}'
-      });
-
+Future<List<Book>> fetchBooks() async {
   try {
-    return Book.fromJson(jsonDecode(response.body));
-  } on Exception catch (err) {
+    final response = await http.get(
+        Uri.parse(
+            "https://api.baserow.io/api/database/rows/table/170700/?user_field_names=true"),
+        headers: {
+          HttpHeaders.authorizationHeader: 'Token ${AppConstants.apiToken}'
+        });
+
+    Map<String, dynamic> jsonRes = jsonDecode(response.body);
+
+    List<dynamic> booksMap = jsonRes['results'];
+
+    // Iterable<dynamic> booksMap = json.decode(response.body);
+
+    List<Book> books = List<Book>.from(booksMap.map(
+      (e) => Book.fromJson(e),
+    ));
+
+    return books;
+  } on Exception {
     rethrow;
   }
 }
