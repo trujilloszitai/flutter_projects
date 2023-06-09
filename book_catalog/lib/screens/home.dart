@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:book_catalog/widgets/future_book.dart';
-import 'package:book_catalog/widgets/baserow_connection.dart';
+// import 'package:book_catalog/widgets/baserow_connection.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -20,12 +20,12 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const FutureBook(),
-            ConnectServer(),
+            FutureBook(),
+            // ConnectServer(),
           ],
         ),
       ),
