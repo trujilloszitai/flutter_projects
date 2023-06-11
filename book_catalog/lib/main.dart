@@ -53,14 +53,17 @@ class _AppState extends State<BookCatalogApp> {
           ),
           bottomNavigationBar:
               Navbar(currentIndex: _selectedIndex, onTap: _onItemTapped),
-          body: IndexedStack(
-            index: _selectedIndex,
-            children: const <Widget>[
-              HomePage(title: 'Catálogo de libros'),
-              BooksList(),
-              AuthorsList(),
-              PublishersList(),
-            ],
+          body: Container(
+            color: Colors.grey[50],
+            child: IndexedStack(
+              index: _selectedIndex,
+              children: const <Widget>[
+                HomePage(title: 'Catálogo de libros'),
+                BooksList(),
+                AuthorsList(),
+                PublishersList(),
+              ],
+            ),
           )
           /* const Center(
           child: Column(

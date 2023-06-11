@@ -11,12 +11,14 @@ class Navbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       currentIndex: currentIndex,
-      backgroundColor: Colors.red,
       onTap: onTap,
       items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Inicio'),
         BottomNavigationBarItem(
-            icon: Icon(Icons.library_books_rounded), label: 'Inicio'),
+            icon: Icon(Icons.home),
+            label: 'Inicio',
+            backgroundColor: Colors.red),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.library_books_rounded), label: 'Libros'),
         BottomNavigationBarItem(icon: Icon(Icons.group), label: 'Autores'),
         BottomNavigationBarItem(icon: Icon(Icons.public), label: 'Editoriales'),
       ],
