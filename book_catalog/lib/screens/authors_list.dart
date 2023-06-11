@@ -10,6 +10,6 @@ class AuthorsList extends StatefulWidget {
 class _AuthorsListState extends State<AuthorsList> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const Center(child: Text("Lista de autores"));
   }
 }
