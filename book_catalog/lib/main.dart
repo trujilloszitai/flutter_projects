@@ -24,6 +24,7 @@ class _AppState extends State<BookCatalogApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Book Catalog',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.red),
         useMaterial3: true,
