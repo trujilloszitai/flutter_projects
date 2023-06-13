@@ -30,8 +30,6 @@ Future<List<Book>> fetchBooks() async {
 
     List<dynamic> booksMap = jsonRes['results'];
 
-    // Iterable<dynamic> booksMap = json.decode(response.body);
-
     List<Book> books = List<Book>.from(booksMap.map(
       (e) => Book.fromJson(e),
     ));
@@ -65,8 +63,6 @@ Future<List<Author>> fetchAuthors() async {
     Map<String, dynamic> jsonRes = jsonDecode(response.body);
 
     List<dynamic> authorsMap = jsonRes['results'];
-
-    // Iterable<dynamic> booksMap = json.decode(response.body);
 
     List<Author> books = List<Author>.from(authorsMap.map(
       (e) => Author.fromJson(e),
