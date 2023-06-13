@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:book_catalog/services/api.dart';
 import 'package:book_catalog/models/book.dart';
 import 'package:book_catalog/screens/book.dart';
+import 'package:book_catalog/widgets/book_card.dart';
 
 class BooksList extends StatefulWidget {
   const BooksList({Key? key}) : super(key: key);
@@ -29,7 +30,16 @@ class _BooksListState extends State<BooksList> {
             if (snapshot.hasData) {
               List<Book> books = snapshot.data!;
 
-              return ListView.builder(
+              return GridView.count(
+                crossAxisCount: 2,
+                padding: const EdgeInsets.all(24.0),
+                mainAxisSpacing: 24,
+                crossAxisSpacing: 24,
+                children: [
+                  for (Book book in books) BookCard(book: book),
+                ],
+              );
+              /* ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 itemCount: books.length,
@@ -45,7 +55,7 @@ class _BooksListState extends State<BooksList> {
                     },
                   );
                 },
-              );
+              ); */
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             }
