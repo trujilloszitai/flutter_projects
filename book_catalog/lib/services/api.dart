@@ -5,18 +5,18 @@ import 'package:http/http.dart' as http;
 import 'package:book_catalog/models/book.dart';
 import 'package:book_catalog/utils/constants.dart';
 
-Future<Book> fetchBook() async {
-  final response = await http.get(
-      Uri.parse(
-          "https://api.baserow.io/api/database/rows/table/170700/1/?user_field_names=true"),
-      headers: {
-        HttpHeaders.authorizationHeader: 'Token ${AppConstants.apiToken}'
-      });
+Future<Book> fetchBook(int row) async {
+  try {
+    final response = await http.get(
+        Uri.parse(
+            "https://api.baserow.io/api/database/rows/table/170700/$row/?user_field_names=true"),
+        headers: {
+          HttpHeaders.authorizationHeader: 'Token ${AppConstants.apiToken}'
+        });
 
-  if (response.statusCode == 200) {
     return Book.fromJson(jsonDecode(response.body));
-  } else {
-    throw Exception('Error al cargar el libro.');
+  } catch (err) {
+    return Future.error(err);
   }
 }
 
@@ -40,7 +40,7 @@ Future<List<Book>> fetchBooks() async {
     ));
 
     return books;
-  } on Exception {
-    rethrow;
+  } catch (err) {
+    return Future.error(err);
   }
 }
