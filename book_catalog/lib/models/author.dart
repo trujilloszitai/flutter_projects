@@ -13,7 +13,7 @@ class Author {
   String order;
   String name;
   List<Photo> photos;
-  List<Book> books;
+  List<BookS> books;
   String bio;
   String personalNotes;
 
@@ -32,7 +32,7 @@ class Author {
         order: json["order"],
         name: json["Name"],
         photos: List<Photo>.from(json["Photos"].map((x) => Photo.fromJson(x))),
-        books: List<Book>.from(json["Books"].map((x) => Book.fromJson(x))),
+        books: List<BookS>.from(json["BookSs"].map((x) => BookS.fromJson(x))),
         bio: json["Bio"],
         personalNotes: json["Personal notes"],
       );
@@ -42,22 +42,22 @@ class Author {
         "order": order,
         "Name": name,
         "Photos": List<dynamic>.from(photos.map((x) => x.toJson())),
-        "Books": List<dynamic>.from(books.map((x) => x.toJson())),
+        "BookSs": List<dynamic>.from(books.map((x) => x.toJson())),
         "Bio": bio,
         "Personal notes": personalNotes,
       };
 }
 
-class Book {
+class BookS {
   int id;
   String value;
 
-  Book({
+  BookS({
     required this.id,
     required this.value,
   });
 
-  factory Book.fromJson(Map<String, dynamic> json) => Book(
+  factory BookS.fromJson(Map<String, dynamic> json) => BookS(
         id: json["id"],
         value: json["value"],
       );

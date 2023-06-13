@@ -4,7 +4,8 @@ import 'package:book_catalog/services/api.dart';
 import 'package:book_catalog/models/book.dart';
 
 class FutureBook extends StatefulWidget {
-  const FutureBook({Key? key}) : super(key: key);
+  final int rowId;
+  const FutureBook({Key? key, required this.rowId}) : super(key: key);
 
   @override
   State<FutureBook> createState() => _FutureBookState();
@@ -16,7 +17,7 @@ class _FutureBookState extends State<FutureBook> {
   @override
   void initState() {
     super.initState();
-    futureBook = fetchBook();
+    futureBook = findBook(widget.rowId);
   }
 
   @override
@@ -25,7 +26,17 @@ class _FutureBookState extends State<FutureBook> {
       future: futureBook,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return Text(snapshot.data!.bookTitle);
+          Book book = snapshot.data!;
+          return Column(
+            children: [
+              Text("Título: ${book.bookTitle}"),
+              Text("Sinopsis: ${book.synopsis}"),
+              const Text("Autores:"),
+              for (AuthorS author in book.authorS) Text(author.value),
+              const Text("Editoriales:"),
+              for (AuthorS publisher in book.publisher) Text(publisher.value),
+            ],
+          );
         } else if (snapshot.hasError) {
           return Text('${snapshot.error}');
         }

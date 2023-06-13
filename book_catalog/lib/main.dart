@@ -62,12 +62,6 @@ class _AppState extends State<BookCatalogApp> {
               ],
             ),
           )
-          /* const Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[],
-          ),
-        ), */
           /* floatingActionButton: FloatingActionButton(
           onPressed: _incrementCounter,
           tooltip: 'Increment',
