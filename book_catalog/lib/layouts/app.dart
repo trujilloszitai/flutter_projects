@@ -10,10 +10,12 @@ class AppLayout extends StatefulWidget {
     Key? key,
     this.appTitle,
     this.appTitles = const <String>[''],
+    this.body,
   }) : super(key: key);
 
   final String? appTitle;
   final List<String> appTitles;
+  final Widget? body;
 
   final List<Widget> indexedStack = const <Widget>[
     BooksList(),
@@ -49,10 +51,11 @@ class _AppLayoutState extends State<AppLayout> {
             Navbar(currentIndex: _selectedIndex, onTap: _onItemTapped),
         body: Container(
           color: Colors.grey[50],
-          child: IndexedStack(
-            index: _selectedIndex,
-            children: widget.indexedStack,
-          ),
+          child: widget.body ??
+              IndexedStack(
+                index: _selectedIndex,
+                children: widget.indexedStack,
+              ),
         ));
   }
 }
