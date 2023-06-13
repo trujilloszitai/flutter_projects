@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:book_catalog/services/api.dart';
 import 'package:book_catalog/models/book.dart';
+import 'package:book_catalog/screens/book.dart';
 
 class BooksList extends StatefulWidget {
   const BooksList({Key? key}) : super(key: key);
@@ -26,13 +27,22 @@ class _BooksListState extends State<BooksList> {
           future: books,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
+              List<Book> books = snapshot.data!;
+
               return ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount: snapshot.data!.length,
+                itemCount: books.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(snapshot.data![index].bookTitle),
+                    title: Text(books[index].bookTitle),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  ShowBook(book: books[index])));
+                    },
                   );
                 },
               );
