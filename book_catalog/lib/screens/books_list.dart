@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 import 'package:book_catalog/services/api.dart';
 import 'package:book_catalog/models/book.dart';
-import 'package:book_catalog/screens/book.dart';
 import 'package:book_catalog/widgets/book_card.dart';
 
 class BooksList extends StatefulWidget {
@@ -23,6 +23,9 @@ class _BooksListState extends State<BooksList> {
 
   @override
   Widget build(BuildContext context) {
+    final widthCount = (MediaQuery.of(context).size.width ~/ 250).toInt();
+    const minCount = 2;
+
     return Center(
       child: FutureBuilder(
           future: books,
@@ -31,7 +34,8 @@ class _BooksListState extends State<BooksList> {
               List<Book> books = snapshot.data!;
 
               return GridView.count(
-                crossAxisCount: 2,
+                crossAxisCount: min(widthCount, minCount),
+                shrinkWrap: true,
                 padding: const EdgeInsets.all(24.0),
                 mainAxisSpacing: 24,
                 crossAxisSpacing: 24,

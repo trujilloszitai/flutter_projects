@@ -29,6 +29,7 @@ class BookCard extends StatelessWidget {
           book.coverPhoto[0].url,
           width: 75.0,
           height: 100.0,
+          semanticLabel: "Portada de ${book.bookTitle}",
         ),
         Column(
           children: [
